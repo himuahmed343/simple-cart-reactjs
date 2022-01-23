@@ -1,26 +1,41 @@
 import React, { useEffect, useState } from "react";
 import Product from "../Product/Product";
-
+import "./Products.css";
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const getProducts = () => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((err) => {
-        console.error(err);
-      });
+  const [loading, setLoading] = useState(false);
+  const getProducts = async () => {
+    try {
+      setLoading(true);
+      const productsCall = await fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((err) => {
+          console.error(err);
+        });
+      setLoading(false);
+      setProducts(productsCall);
+    } catch (err) {
+      console.error(err);
+    }
   };
   useEffect(() => {
     getProducts();
   }, []);
-  console.log(products);
+  // console.log(products);
   return (
-    <>
-      {products.map((product, index) => (
+    <div className="products">
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        products.map((product, index) => (
+          <Product key={index} product={product} />
+        ))
+      )}
+      {/* {products.map((product, index) => (
         <Product key={index} product={product} />
-      ))}
-    </>
+      ))} */}
+    </div>
   );
 };
 

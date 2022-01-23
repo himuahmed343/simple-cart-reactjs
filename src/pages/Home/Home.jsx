@@ -3,8 +3,7 @@ import Products from "../../components/Products/Products";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="container">
       <Products />
     </div>
   );
