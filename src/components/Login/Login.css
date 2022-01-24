@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+}
+
+.input-group h1 {
+  margin: 20px 0;
+}
+
+input {
+  border: 1px solid #80808038;
+  width: 80%;
+  font-size: 18px;
+  padding: 15px;
+  margin: 5px 0;
+}
+
+button {
+  margin: 15px 0;
+}
