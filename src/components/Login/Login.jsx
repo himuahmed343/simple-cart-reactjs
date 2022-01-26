@@ -21,6 +21,16 @@ const Login = () => {
     }
   };
 
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await googleSignIn();
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
   return (
     <div className="container">
       <div className="content">
@@ -50,7 +60,7 @@ const Login = () => {
               margin: "10px 0",
             }}
           />
-          <button>
+          <button onClick={handleGoogleSignIn}>
             Sign in with Google <FcGoogle />
           </button>
           <p>

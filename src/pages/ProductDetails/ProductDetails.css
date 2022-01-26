@@ -1,0 +1,14 @@
+.productDetails {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.leftItem {
+  flex: 2;
+}
+
+.rightItem {
+  flex: 3;
+}

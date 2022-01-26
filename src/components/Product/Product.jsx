@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import "./Product.css";
 
 const Product = ({ product }) => {
@@ -12,6 +13,7 @@ const Product = ({ product }) => {
 
     console.log("cart");
   };
+  let productDetails = `/product/${title}`;
   // console.log(cart);
   return (
     <div className="product">
@@ -19,7 +21,10 @@ const Product = ({ product }) => {
         <img src={image} alt="" />
       </div>
       <div className="product-details">
-        <h3>{title.length > 10 ? title.slice(0, 35) + "..." : title}</h3>
+        <Link to={productDetails}>
+          {" "}
+          <h3>{title.length > 10 ? title.slice(0, 35) + "..." : title}</h3>
+        </Link>
         <p>Price: $ {price}</p>
         <button
           onClick={() => {
