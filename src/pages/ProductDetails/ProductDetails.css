@@ -1,14 +1,66 @@
+@import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
+
 .productDetails {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 70px;
 }
 
 .leftItem {
+  display: flex;
+  justify-content: center;
   flex: 2;
+}
+
+.leftItem img {
+  max-width: 450px;
+  position: relative;
 }
 
 .rightItem {
   flex: 3;
+  padding: 100px 0px 0 60px;
+}
+.rightItem h1 {
+  color: #000;
+  font-size: 36px;
+  font-weight: 600;
+}
+.rightItem p {
+  font-size: 18px;
+  color: #666;
+
+  line-height: 28px;
+  margin: 50px 0;
+}
+.cart-qty {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.cart-qty button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.decrementBtn {
+  margin-right: 25px;
+}
+
+.incrementBtn {
+  margin-left: 25px;
+}
+
+.cart-qty span {
+  font-size: 25px;
+  font-weight: 600;
 }

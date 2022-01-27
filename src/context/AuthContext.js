@@ -45,7 +45,7 @@ export function AuthContextProvider({ children }) {
     };
     useEffect(() => {
       getProducts();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -59,6 +59,7 @@ export function AuthContextProvider({ children }) {
             unsubscribe()
         }
     }, [])
+    console.log("products:", products);
 
     return (
         <userAuthContext.Provider
