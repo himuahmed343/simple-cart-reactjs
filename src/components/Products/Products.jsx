@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../Product/Product";
 import "./Products.css";
-const Products = () => {
+const Products = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const getProducts = async () => {
@@ -29,7 +29,7 @@ const Products = () => {
         <div>Loading...</div>
       ) : (
         products.map((product, index) => (
-          <Product key={index} product={product} />
+          <Product key={index} product={product} addToCart={addToCart} />
         ))
       )}
       {/* {products.map((product, index) => (

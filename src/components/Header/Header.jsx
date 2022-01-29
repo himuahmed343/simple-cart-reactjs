@@ -9,11 +9,13 @@ const Header = () => {
         <div className="container">
           <div className="nav-items">
             <div className="nav-brand">
-              <Link to="/home">HelloCom</Link>
+              <Link to="/">HelloCom</Link>
             </div>
             <div className="nav-icon">
-              <RiShoppingCartLine />
-              <div>3</div>
+              <Link to="/cart">
+                <RiShoppingCartLine />
+                <div>3</div>
+              </Link>
             </div>
           </div>
         </div>

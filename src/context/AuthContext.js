@@ -59,7 +59,7 @@ export function AuthContextProvider({ children }) {
             unsubscribe()
         }
     }, [])
-    console.log("products:", products);
+    // console.log("products:", products);
 
     return (
         <userAuthContext.Provider
