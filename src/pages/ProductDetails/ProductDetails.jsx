@@ -1,20 +1,33 @@
-import React, { useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { RiShoppingCartLine } from "react-icons/ri";
+import { useNavigate, useParams } from "react-router";
 import { useUserAuth } from "../../context/AuthContext";
 import "./ProductDetails.css";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const ProductDetails = () => {
-  const { products, loading } = useUserAuth();
+  const { products, loading, user } = useUserAuth();
   const [qty, setQty] = useState(1);
   const [prodPrice, setProdPrice] = useState(0);
   // console.log(products);
   const productTitle = useParams();
-  //   console.log(productTitle.productTitle);
+  let navigate = useNavigate();
+
   const product = products.filter(
     (product) => product.title === productTitle.productTitle
   );
 
   const { id, title, description, price, image } = product[0];
+
+  const prodTotalPrice = () => {
+    const totalPrice = price * qty;
+    setProdPrice(totalPrice);
+  };
+
+  useEffect(() => {
+    prodTotalPrice();
+  }, [qty]);
 
   const incrementBtn = () => {
     const newCount = qty + 1;
@@ -37,14 +50,26 @@ const ProductDetails = () => {
     }
   };
 
-  // const totalPrice = () => {
-  //   setProdPrice(price * qty);
-  // };
-  console.log(prodPrice);
-
-  // const handleChange = (e) => {
-  //   const value = parseInt(e.target.value);
-  // };
+  const handleAddToCart = async (prod) => {
+    if (user) {
+      const querySnapshot = await getDocs(collection(db, "Cart" + user.uid));
+      querySnapshot.forEach((doc) => {
+        const products = doc.data();
+        // if (product.id === products.prod.id) {
+        //   console.log(products.prod.id);
+        // } else {
+        //   console.log("Bhul hoise boss");
+        // }
+        console.log(products);
+        console.log(product);
+        // products.forEach((product) => {
+        //   console.log("product", product);
+        // });
+      });
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="container">
@@ -77,6 +102,20 @@ const ProductDetails = () => {
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                handleAddToCart(product);
+              }}
+            >
+              <RiShoppingCartLine
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  marginRight: "5px",
+                }}
+              />
+              Add to Cart{" "}
+            </button>
           </div>
         </div>
       )}

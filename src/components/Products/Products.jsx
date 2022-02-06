@@ -22,7 +22,7 @@ const Products = ({ addToCart }) => {
   useEffect(() => {
     getProducts();
   }, []);
-  // console.log(products);
+  console.log(products);
   return (
     <div className="products">
       {loading ? (

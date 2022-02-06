@@ -1,14 +1,22 @@
+import { addDoc, collection } from "@firebase/firestore";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut,GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import { useNavigate } from "react-router";
+import { auth, db } from '../firebase';
 
-import {auth} from '../firebase'
 
 const userAuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
 
     const [user, setUser] =useState('')
+  const [qty, setQty] = useState(1);
 
+  let navigate = useNavigate();
+
+
+
+    const [prodPrice, setProdPrice] = useState(0);
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
     }
@@ -59,11 +67,43 @@ export function AuthContextProvider({ children }) {
             unsubscribe()
         }
     }, [])
-    // console.log("products:", products);
+  
+
+
+
+
+
+
+
+  
+    // Add to cart handler
+  
+    const addToCart = async (prod) => {
+      let Product;
+      if (user) {
+        setQty(1);
+        setProdPrice(prod.price);
+        Product = prod;
+        Product["qty"] = qty;
+        Product["TotalProductPrice"] = qty * prodPrice;
+  
+        try {
+          await addDoc(collection(db, "Cart" + user.uid), {
+            prod,
+          });
+      
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      } else {
+        navigate("/login");
+      }
+    };
+  
 
     return (
         <userAuthContext.Provider
-        value={{ user, signUp, logIn, logOut,googleSignIn, products, loading }} >{children}</userAuthContext.Provider>
+        value={{ user, signUp, logIn, logOut,googleSignIn, products, loading,addToCart }} >{children}</userAuthContext.Provider>
     )
   
 }
