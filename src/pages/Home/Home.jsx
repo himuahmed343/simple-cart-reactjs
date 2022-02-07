@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import Products from "../../components/Products/Products";
+import Hero from "../../components/Hero/Hero";
 import { useUserAuth } from "../../context/AuthContext";
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
           {user.email} <button onClick={handleLogOut}>Sign Out</button>
         </div>
       )}
+      <Hero />
       <Products addToCart={addToCart} />
     </div>
   );
