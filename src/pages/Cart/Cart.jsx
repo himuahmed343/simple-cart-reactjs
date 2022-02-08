@@ -47,7 +47,6 @@ const Cart = () => {
           <Product key={index} product={product.prod} addToCart={addToCart} />
         ))
       )}
-      cart
     </div>
   );
 };

@@ -28,7 +28,6 @@ const Header = () => {
   useEffect(() => {
     getCartProduct();
   });
-  console.log(cart);
   return (
     <>
       <div className="navbar">

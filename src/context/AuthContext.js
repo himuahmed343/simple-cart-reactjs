@@ -1,4 +1,4 @@
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -100,7 +100,30 @@ export function AuthContextProvider({ children }) {
       }
     };
   
+  
+  
+    // const [cartProducts, setCartProducts] = useState([])
 
+  const deleteFromCart = async (productID) => {
+    try {
+      const cartProducts = await getDocs(collection(db, "Cart" + user.uid))
+      const totalCartItem = cartProducts.docs
+      totalCartItem.forEach((doc) => {
+        let prod = doc.data().prod
+        if (productID === prod.id) {
+          console.log(prod)
+        }
+      console.log(`${doc.id} => ${doc.data()}`);
+      console.log(doc.data().prod.id);
+    });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    deleteFromCart(4)
+  }, [])
+// console.log(cartProducts)
     return (
         <userAuthContext.Provider
         value={{ user, signUp, logIn, logOut,googleSignIn, products, loading,addToCart }} >{children}</userAuthContext.Provider>
@@ -114,3 +137,14 @@ export function AuthContextProvider({ children }) {
 export function useUserAuth() {
     return useContext(userAuthContext)
 }
+
+
+
+// for (var item in cart) {
+//   document.getElementById('set' + item).innerHTML =`<button id="minus"+item class="btn btn-primary"  >-</button>`
+//     "<button id='minus" + item class='btn btn-primary minus'>-</button> 
+//     < span id = 'val" + item >" + cart[item] + "</span> 
+//       < button id = 'plus" + item + "' class='btn btn - primary plus' > + </ > ";
+// } 
+
+

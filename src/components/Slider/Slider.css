@@ -1,5 +1,21 @@
 .slider-content {
+  width: 500px;
   position: absolute;
-  top: 8px;
-  left: 16px;
+  transform: translate(0%, -60%);
+  background: linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #2c5364
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 5rem 0;
+}
+
+.slider-content h1 {
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.slider-content p {
+  color: #eee;
 }
